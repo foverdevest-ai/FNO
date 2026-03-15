@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FNO Wealth Planner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">FNO Wealth Planner</p>
+          <h1>Track cash flow. Model your future. Build wealth intentionally.</h1>
+          <p class="hero-copy">
+            Manage monthly expenses and project how your money could grow across
+            crypto, stocks, real estate, and cash.
+          </p>
+        </div>
+        <div class="hero-actions">
+          <button id="load-demo" class="ghost-button">Load demo data</button>
+          <button id="reset-data" class="ghost-button danger">Reset all data</button>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="panel panel-wide">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Snapshot</p>
+              <h2>Your financial position</h2>
+            </div>
+          </div>
+          <div id="summary-cards" class="summary-grid"></div>
+        </section>
+
+        <section class="panel">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Profile</p>
+              <h2>Planning assumptions</h2>
+            </div>
+          </div>
+          <form id="profile-form" class="stack-form">
+            <label>
+              Monthly income
+              <input name="monthlyIncome" type="number" min="0" step="0.01" required />
+            </label>
+            <label>
+              Cash reserve
+              <input name="cashReserve" type="number" min="0" step="0.01" required />
+            </label>
+            <label>
+              Projection years
+              <input name="projectionYears" type="number" min="1" max="40" step="1" required />
+            </label>
+            <button type="submit" class="primary-button">Save profile</button>
+          </form>
+        </section>
+
+        <section class="panel">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Expenses</p>
+              <h2>Recurring monthly payments</h2>
+            </div>
+          </div>
+          <form id="expense-form" class="stack-form compact-form">
+            <label>
+              Label
+              <input name="label" type="text" maxlength="40" required />
+            </label>
+            <label>
+              Category
+              <select name="category">
+                <option>Housing</option>
+                <option>Food</option>
+                <option>Transport</option>
+                <option>Insurance</option>
+                <option>Utilities</option>
+                <option>Debt</option>
+                <option>Lifestyle</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <label>
+              Monthly amount
+              <input name="amount" type="number" min="0" step="0.01" required />
+            </label>
+            <button type="submit" class="primary-button">Add payment</button>
+          </form>
+          <div id="expense-list" class="collection-list"></div>
+        </section>
+
+        <section class="panel panel-wide">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Portfolio</p>
+              <h2>Assets and growth assumptions</h2>
+            </div>
+          </div>
+          <form id="asset-form" class="asset-form-grid">
+            <label>
+              Asset name
+              <input name="label" type="text" maxlength="40" required />
+            </label>
+            <label>
+              Type
+              <select name="type">
+                <option>Crypto</option>
+                <option>Stocks</option>
+                <option>Real Estate</option>
+                <option>Cash</option>
+              </select>
+            </label>
+            <label>
+              Current value
+              <input name="currentValue" type="number" min="0" step="0.01" required />
+            </label>
+            <label>
+              Monthly contribution
+              <input name="monthlyContribution" type="number" min="0" step="0.01" required />
+            </label>
+            <label>
+              Expected annual return %
+              <input name="annualReturn" type="number" min="-100" step="0.1" required />
+            </label>
+            <button type="submit" class="primary-button">Add asset</button>
+          </form>
+          <div id="asset-list" class="collection-list"></div>
+        </section>
+
+        <section class="panel panel-wide">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Projection</p>
+              <h2>Projected net worth trajectory</h2>
+            </div>
+            <div id="projection-highlights" class="projection-highlights"></div>
+          </div>
+          <div class="chart-frame">
+            <svg id="projection-chart" viewBox="0 0 960 320" preserveAspectRatio="none"></svg>
+          </div>
+          <div id="projection-table" class="projection-table"></div>
+        </section>
+      </main>
+    </div>
+
+    <template id="item-row-template">
+      <article class="item-row">
+        <div class="item-copy">
+          <strong class="item-title"></strong>
+          <p class="item-meta"></p>
+        </div>
+        <div class="item-actions">
+          <span class="item-value"></span>
+          <button class="delete-button" type="button">Delete</button>
+        </div>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
